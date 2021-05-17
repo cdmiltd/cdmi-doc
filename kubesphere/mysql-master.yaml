@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql-master
+  namespace: cdmi-default
+  labels:
+    app: mysql-master
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/version: v1
+    version: v1
+  annotations:
+    kubesphere.io/creator: wuwei
+    kubesphere.io/serviceType: statefulservice
+    servicemesh.kubesphere.io/enabled: ‘false’
+spec:
+  type: NodePort
+  ports:
+    - port: 3306
+      protocol: TCP
+      targetPort: 3306
+      nodePort: 31306
+  selector:
+    app: mysql-master
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/version: v1

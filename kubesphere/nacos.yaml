@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nacos-server
+  namespace: cdmi-default
+  labels:
+    app: nacos-server
+    app.kubernetes.io/name: nacos
+    app.kubernetes.io/version: v1
+    version: v1
+  annotations:
+    kubesphere.io/creator: wuwei
+    kubesphere.io/serviceType: statefulservice
+    servicemesh.kubesphere.io/enabled: ‘false’
+spec:
+  type: NodePort
+  ports:
+    - port: 8848
+      protocol: TCP
+      targetPort: 8848
+      nodePort: 31848
+  selector:
+    app: nacos-server
+    app.kubernetes.io/name: nacos
+    app.kubernetes.io/version: v1

@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-035
+  namespace: cdmi-default
+  labels:
+    app: redis-035
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/version: v1
+    version: v1
+  annotations:
+    kubesphere.io/creator: wuwei
+    kubesphere.io/serviceType: statefulservice
+    servicemesh.kubesphere.io/enabled: ‘false’
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      protocol: TCP
+      targetPort: 6379
+      nodePort: 31379
+  selector:
+    app: redis-035
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/version: v1

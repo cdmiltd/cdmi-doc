@@ -1,0 +1,31 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rabbitmq-server
+  namespace: cdmi-default
+  labels:
+    app: rabbitmq-server
+    app.kubernetes.io/name: rabbitmq
+    app.kubernetes.io/version: v1
+    version: v1
+  annotations:
+    kubesphere.io/creator: wuwei
+    kubesphere.io/serviceType: statefulservice
+    servicemesh.kubesphere.io/enabled: ‘false’
+spec:
+  type: NodePort
+  ports:
+    - name: amqp
+      protocol: TCP
+      port: 5672
+      targetPort: amqp
+      nodePort: 31672
+    - name: management
+      protocol: TCP
+      port: 15672
+      targetPort: management
+      nodePort: 31673
+  selector:
+    app: rabbitmq-server
+    app.kubernetes.io/name: rabbitmq
+    app.kubernetes.io/version: v1
